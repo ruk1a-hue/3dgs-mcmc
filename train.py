@@ -12,8 +12,8 @@
 import os
 import json
 import torch
-from random import randint
-from utils.loss_utils import l1_loss, ssim
+from random import choices, randint
+from utils.loss_utils import gradient_l1_loss, l1_loss, ssim
 from gaussian_renderer import render, network_gui
 import sys
 from scene import Scene, GaussianModel
@@ -36,7 +36,7 @@ def training(dataset, opt, pipe, testing_iterations, saving_iterations, checkpoi
         exit()
     first_iter = 0
     tb_writer = prepare_output_and_logger(dataset)
-    gaussians = GaussianModel(dataset.sh_degree)
+    gaussians = GaussianModel(dataset.sh_degree, resampling_strategy=dataset.resampling_strategy)
     scene = Scene(dataset, gaussians)
     gaussians.training_setup(opt)
     if checkpoint:
@@ -50,6 +50,8 @@ def training(dataset, opt, pipe, testing_iterations, saving_iterations, checkpoi
     iter_end = torch.cuda.Event(enable_timing = True)
 
     viewpoint_stack = None
+    train_cameras = scene.getTrainCameras()
+    view_loss_ema = {camera.uid: 1.0 for camera in train_cameras}
     ema_loss_for_log = 0.0
     progress_bar = tqdm(range(first_iter, opt.iterations), desc="Training progress")
     first_iter += 1
@@ -78,12 +80,17 @@ def training(dataset, opt, pipe, testing_iterations, saving_iterations, checkpoi
         if iteration % 1000 == 0:
             gaussians.oneupSHdegree()
 
-        # Pick a random Camera
-        if not viewpoint_stack:
-            viewpoint_stack = scene.getTrainCameras().copy()
-            viewpoint_cam = viewpoint_stack.pop(randint(0, len(viewpoint_stack)-1))
+        # Pick a training camera. Hard-view sampling is delayed so early geometry still forms uniformly.
+        hard_sampling_active = opt.hard_view_sampling and iteration >= opt.hard_view_start_iter
+        if hard_sampling_active:
+            weights = [max(view_loss_ema[camera.uid], 1e-6) ** opt.hard_view_power for camera in train_cameras]
+            viewpoint_cam = choices(train_cameras, weights=weights, k=1)[0]
         else:
-            viewpoint_cam = viewpoint_stack.pop(randint(0, len(viewpoint_stack)-1))
+            if not viewpoint_stack:
+                viewpoint_stack = train_cameras.copy()
+                viewpoint_cam = viewpoint_stack.pop(randint(0, len(viewpoint_stack)-1))
+            else:
+                viewpoint_cam = viewpoint_stack.pop(randint(0, len(viewpoint_stack)-1))
 
         # Render
         if (iteration - 1) == debug_from:
@@ -97,7 +104,16 @@ def training(dataset, opt, pipe, testing_iterations, saving_iterations, checkpoi
         # Loss
         gt_image = viewpoint_cam.original_image.cuda()
         Ll1 = l1_loss(image, gt_image)
-        loss = (1.0 - opt.lambda_dssim) * Ll1 + opt.lambda_dssim * (1.0 - ssim(image, gt_image))
+        reconstruction_loss = (1.0 - opt.lambda_dssim) * Ll1 + opt.lambda_dssim * (1.0 - ssim(image, gt_image))
+        loss = reconstruction_loss
+        edge_loss = torch.zeros((), dtype=loss.dtype, device=loss.device)
+        if opt.edge_loss_weight > 0.0 and iteration >= opt.edge_loss_start_iter:
+            edge_loss = gradient_l1_loss(image, gt_image)
+            loss = loss + opt.edge_loss_weight * edge_loss
+        mse_loss = torch.zeros((), dtype=loss.dtype, device=loss.device)
+        if opt.mse_loss_weight > 0.0 and iteration >= opt.mse_loss_start_iter:
+            mse_loss = torch.mean((image - gt_image) ** 2)
+            loss = loss + opt.mse_loss_weight * mse_loss
 
         loss = loss + args.opacity_reg * torch.abs(gaussians.get_opacity).mean()
         loss = loss + args.scale_reg * torch.abs(gaussians.get_scaling).mean()
@@ -107,10 +123,21 @@ def training(dataset, opt, pipe, testing_iterations, saving_iterations, checkpoi
         iter_end.record()
 
         with torch.no_grad():
+            current_reconstruction_loss = reconstruction_loss.item()
+            view_loss_ema[viewpoint_cam.uid] = (
+                opt.hard_view_ema_decay * view_loss_ema[viewpoint_cam.uid]
+                + (1.0 - opt.hard_view_ema_decay) * current_reconstruction_loss
+            )
+
             # Progress bar
             ema_loss_for_log = 0.4 * loss.item() + 0.6 * ema_loss_for_log
             if iteration % 10 == 0:
-                progress_bar.set_postfix({"Loss": f"{ema_loss_for_log:.{7}f}"})
+                progress_bar.set_postfix({
+                    "Loss": f"{ema_loss_for_log:.{7}f}",
+                    "Edge": f"{edge_loss.item():.{5}f}",
+                    "MSE": f"{mse_loss.item():.{5}f}",
+                    "Hard": int(hard_sampling_active),
+                })
                 progress_bar.update(10)
             if iteration == opt.iterations:
                 progress_bar.close()
@@ -221,6 +248,7 @@ if __name__ == "__main__":
     parser.add_argument("--test_iterations", nargs="+", type=int, default=[7_000, 30_000])
     parser.add_argument("--save_iterations", nargs="+", type=int, default=[7_000, 30_000])
     parser.add_argument("--quiet", action="store_true")
+    parser.add_argument("--seed", type=int, default=0)
     parser.add_argument("--checkpoint_iterations", nargs="+", type=int, default=[])
     parser.add_argument("--start_checkpoint", type=str, default = None)
     args = parser.parse_args(sys.argv[1:])
@@ -237,7 +265,7 @@ if __name__ == "__main__":
     print("Optimizing " + args.model_path)
 
     # Initialize system state (RNG)
-    safe_state(args.quiet)
+    safe_state(args.quiet, seed=args.seed)
 
     # Start GUI server, configure and run training
     # network_gui.init(args.ip, args.port)
