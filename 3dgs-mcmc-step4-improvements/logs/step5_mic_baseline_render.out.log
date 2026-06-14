@@ -1,0 +1,9 @@
+Looking for config file in D:\AI WORK\3dgs-mcmc-step4-improvements\output\step5\mic_baseline_seed0\cfg_args
+Config file found: D:\AI WORK\3dgs-mcmc-step4-improvements\output\step5\mic_baseline_seed0\cfg_args
+Rendering D:\AI WORK\3dgs-mcmc-step4-improvements\output\step5\mic_baseline_seed0
+Loading trained model at iteration 30000 [13/06 15:10:54]
+Found transforms_train.json file, assuming Blender data set! [13/06 15:10:54]
+Reading Training Transforms [13/06 15:10:54]
+Reading Test Transforms [13/06 15:10:59]
+Loading Training Cameras [13/06 15:11:09]
+Loading Test Cameras [13/06 15:11:10]

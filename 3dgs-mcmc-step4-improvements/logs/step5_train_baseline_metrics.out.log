@@ -1,0 +1,7 @@
+
+Scene: D:\AI WORK\3dgs-mcmc-step4-improvements\output\step5\train_baseline_seed0
+Method: ours_30000
+  SSIM :    0.8245130
+  PSNR :   22.2412167
+  LPIPS:    0.2012545
+

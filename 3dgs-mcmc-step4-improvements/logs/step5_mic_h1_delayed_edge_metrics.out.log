@@ -1,0 +1,7 @@
+
+Scene: D:\AI WORK\3dgs-mcmc-step4-improvements\output\step5\mic_h1_delayed_edge
+Method: ours_30000
+  SSIM :    0.9939844
+  PSNR :   37.2671471
+  LPIPS:    0.0048993
+
