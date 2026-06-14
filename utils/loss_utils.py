@@ -20,6 +20,31 @@ def l1_loss(network_output, gt):
 def l2_loss(network_output, gt):
     return ((network_output - gt) ** 2).mean()
 
+def sobel_gradient(img):
+    if img.dim() == 3:
+        img = img.unsqueeze(0)
+
+    channels = img.shape[1]
+    kernel_x = torch.tensor(
+        [[1, 0, -1], [2, 0, -2], [1, 0, -1]],
+        dtype=img.dtype,
+        device=img.device,
+    ).view(1, 1, 3, 3)
+    kernel_y = torch.tensor(
+        [[1, 2, 1], [0, 0, 0], [-1, -2, -1]],
+        dtype=img.dtype,
+        device=img.device,
+    ).view(1, 1, 3, 3)
+
+    kernel_x = kernel_x.repeat(channels, 1, 1, 1)
+    kernel_y = kernel_y.repeat(channels, 1, 1, 1)
+    grad_x = F.conv2d(img, kernel_x, padding=1, groups=channels)
+    grad_y = F.conv2d(img, kernel_y, padding=1, groups=channels)
+    return torch.cat((grad_x, grad_y), dim=1)
+
+def gradient_l1_loss(network_output, gt):
+    return torch.abs(sobel_gradient(network_output) - sobel_gradient(gt)).mean()
+
 def gaussian(window_size, sigma):
     gauss = torch.Tensor([exp(-(x - window_size // 2) ** 2 / float(2 * sigma ** 2)) for x in range(window_size)])
     return gauss / gauss.sum()
@@ -61,4 +86,3 @@ def _ssim(img1, img2, window, window_size, channel, size_average=True):
         return ssim_map.mean()
     else:
         return ssim_map.mean(1).mean(1).mean(1)
-
