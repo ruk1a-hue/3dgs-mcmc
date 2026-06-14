@@ -1,0 +1,7 @@
+
+Scene: D:\AI WORK\3dgs-mcmc-step4-improvements\output\step5\train_h1_edge
+Method: ours_30000
+  SSIM :    0.8252993
+  PSNR :   22.1941566
+  LPIPS:    0.1992318
+

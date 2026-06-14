@@ -1,0 +1,9 @@
+Looking for config file in D:\AI WORK\3dgs-mcmc-step4-improvements\output\step5\mic_h2_systematic_80cap\cfg_args
+Config file found: D:\AI WORK\3dgs-mcmc-step4-improvements\output\step5\mic_h2_systematic_80cap\cfg_args
+Rendering D:\AI WORK\3dgs-mcmc-step4-improvements\output\step5\mic_h2_systematic_80cap
+Loading trained model at iteration 30000 [14/06 10:41:43]
+Found transforms_train.json file, assuming Blender data set! [14/06 10:41:43]
+Reading Training Transforms [14/06 10:41:43]
+Reading Test Transforms [14/06 10:41:48]
+Loading Training Cameras [14/06 10:41:57]
+Loading Test Cameras [14/06 10:41:58]
