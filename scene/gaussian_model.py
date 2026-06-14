@@ -42,7 +42,7 @@ class GaussianModel:
         self.rotation_activation = torch.nn.functional.normalize
 
 
-    def __init__(self, sh_degree : int):
+    def __init__(self, sh_degree : int, resampling_strategy="multinomial"):
         self.active_sh_degree = 0
         self.max_sh_degree = sh_degree  
         self._xyz = torch.empty(0)
@@ -57,6 +57,7 @@ class GaussianModel:
         self.optimizer = None
         self.percent_dense = 0
         self.spatial_lr_scale = 0
+        self.resampling_strategy = resampling_strategy
         self.setup_functions()
 
     def capture(self):
@@ -462,10 +463,19 @@ class GaussianModel:
 
     def _sample_alives(self, probs, num, alive_indices=None):
         probs = probs / (probs.sum() + torch.finfo(torch.float32).eps)
-        sampled_idxs = torch.multinomial(probs, num, replacement=True)
+        if self.resampling_strategy == "multinomial":
+            sampled_idxs = torch.multinomial(probs, num, replacement=True)
+        elif self.resampling_strategy == "systematic":
+            cdf = torch.cumsum(probs, dim=0)
+            cdf[-1] = 1.0
+            offset = torch.rand(1, dtype=probs.dtype, device=probs.device)
+            positions = (torch.arange(num, dtype=probs.dtype, device=probs.device) + offset) / num
+            sampled_idxs = torch.searchsorted(cdf, positions).clamp(max=probs.shape[0] - 1)
+        else:
+            raise ValueError(f"Unknown resampling strategy: {self.resampling_strategy}")
         if alive_indices is not None:
             sampled_idxs = alive_indices[sampled_idxs]
-        ratio = torch.bincount(sampled_idxs).unsqueeze(-1)
+        ratio = torch.bincount(sampled_idxs, minlength=self._opacity.shape[0]).unsqueeze(-1)
         return sampled_idxs, ratio
     
 
@@ -527,7 +537,6 @@ class GaussianModel:
         self.replace_tensors_to_optimizer(inds=add_idx)
 
         return num_gs
-
 
 
 

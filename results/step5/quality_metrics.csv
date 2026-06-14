@@ -1,0 +1,12 @@
+scene,variant,model_path,psnr,ssim,lpips
+mic,baseline,D:\AI WORK\3dgs-mcmc-step4-improvements\output\step5\mic_baseline_seed0,37.28120422363281,0.993990421295166,0.0049061886966228485
+mic,h1h2_edge_systematic_80cap,D:\AI WORK\3dgs-mcmc-step4-improvements\output\step5\mic_h1h2_edge_systematic_80cap,37.2082405090332,0.9938961267471313,0.004979768767952919
+train,baseline,D:\AI WORK\3dgs-mcmc-step4-improvements\output\step5\train_baseline_seed0,22.2412166595459,0.8245129585266113,0.20125450193881989
+train,h1_edge,D:\AI WORK\3dgs-mcmc-step4-improvements\output\step5\train_h1_edge,22.194156646728516,0.8252993226051331,0.199231818318367
+train,h1_delayed_edge,D:\AI WORK\3dgs-mcmc-step4-improvements\output\step5\train_h1_delayed_edge,22.364852905273438,0.8250511288642883,0.199818417429924
+train,h2_systematic_80cap,D:\AI WORK\3dgs-mcmc-step4-improvements\output\step5\train_h2_systematic_80cap_full,22.15616226196289,0.8194673657417297,0.20995759963989258
+train,h1delayed_h2_systematic_80cap,D:\AI WORK\3dgs-mcmc-step4-improvements\output\step5\train_h1delayed_h2_systematic_80cap,22.148479461669922,0.8187079429626465,0.20954884588718414
+train,hardview_sampling,D:\AI WORK\3dgs-mcmc-step4-improvements\output\step5\train_hardview_sampling,22.12582015991211,0.8232212662696838,0.20143385231494904
+mic,h1_delayed_edge,D:\AI WORK\3dgs-mcmc-step4-improvements\output\step5\mic_h1_delayed_edge,37.267147064208984,0.9939844012260437,0.0048993295058608055
+mic,h2_systematic_80cap,D:\AI WORK\3dgs-mcmc-step4-improvements\output\step5\mic_h2_systematic_80cap,37.17102813720703,0.9938398599624634,0.0050714160315692425
+train,h1_mse_delayed_w005_s7000,D:\AI WORK\3dgs-mcmc-step4-improvements\output\step5\train_h1_mse_delayed_w005_s7000,22.265947341918945,0.8255794048309326,0.1988445371389389
