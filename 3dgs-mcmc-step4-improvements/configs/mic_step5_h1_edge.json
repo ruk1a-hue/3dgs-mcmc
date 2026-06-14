@@ -1,0 +1,8 @@
+{
+    "resolution": 1,
+    "cap_max": 320000,
+    "white_background": true,
+    "edge_loss_weight": 0.05,
+    "resampling_strategy": "multinomial",
+    "seed": 0
+}
