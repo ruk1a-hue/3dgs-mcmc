@@ -56,6 +56,7 @@ class ModelParams(ParamGroup):
         self.eval = False
         self.cap_max = -1
         self.init_type = "random"
+        self.resampling_strategy = "multinomial"
         super().__init__(parser, "Loading Parameters", sentinel)
 
     def extract(self, args):
@@ -92,6 +93,14 @@ class OptimizationParams(ParamGroup):
         self.noise_lr = 5e5
         self.scale_reg = 0.01
         self.opacity_reg = 0.01
+        self.edge_loss_weight = 0.0
+        self.edge_loss_start_iter = 0
+        self.mse_loss_weight = 0.0
+        self.mse_loss_start_iter = 0
+        self.hard_view_sampling = False
+        self.hard_view_start_iter = 7000
+        self.hard_view_ema_decay = 0.9
+        self.hard_view_power = 2.0
         super().__init__(parser, "Optimization Parameters")
 
 def get_combined_args(parser : ArgumentParser):
