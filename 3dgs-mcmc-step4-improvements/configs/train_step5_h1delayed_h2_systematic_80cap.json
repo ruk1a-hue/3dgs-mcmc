@@ -1,8 +1,0 @@
-{
-    "resolution": 1,
-    "cap_max": 880000,
-    "edge_loss_weight": 0.02,
-    "edge_loss_start_iter": 7000,
-    "resampling_strategy": "systematic",
-    "seed": 0
-}

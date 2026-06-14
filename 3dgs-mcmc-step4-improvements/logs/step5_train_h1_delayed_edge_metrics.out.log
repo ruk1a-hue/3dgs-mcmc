@@ -1,7 +1,0 @@
-
-Scene: D:\AI WORK\3dgs-mcmc-step4-improvements\output\step5\train_h1_delayed_edge
-Method: ours_30000
-  SSIM :    0.8250511
-  PSNR :   22.3648529
-  LPIPS:    0.1998184
-

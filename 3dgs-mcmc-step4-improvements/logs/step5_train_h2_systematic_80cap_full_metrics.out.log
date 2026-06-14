@@ -1,7 +1,0 @@
-
-Scene: D:\AI WORK\3dgs-mcmc-step4-improvements\output\step5\train_h2_systematic_80cap_full
-Method: ours_30000
-  SSIM :    0.8194674
-  PSNR :   22.1561623
-  LPIPS:    0.2099576
-

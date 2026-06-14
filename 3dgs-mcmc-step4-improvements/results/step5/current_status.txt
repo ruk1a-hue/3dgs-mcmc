@@ -1,1 +1,0 @@
-DONE train_h1_mse_delayed_w005_s7000
