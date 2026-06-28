@@ -1,0 +1,12 @@
+{
+    "resolution": 1,
+    "cap_max": 1100000,
+    "edge_loss_weight": 0.0,
+    "edge_loss_start_iter": 0,
+    "resampling_strategy": "multinomial",
+    "hard_view_sampling": true,
+    "hard_view_start_iter": 7000,
+    "hard_view_ema_decay": 0.9,
+    "hard_view_power": 2.0,
+    "seed": 0
+}
