@@ -1,0 +1,207 @@
+﻿Processing <WORKSPACE_PATH>
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Building wheels for collected packages: simple_knn
+  Building wheel for simple_knn (pyproject.toml): started
+  Building wheel for simple_knn (pyproject.toml): finished with status 'error'
+cmd :   error: subprocess-exited-with-error
+At line:2 char:1
++ cmd /c run_vs_cuda118.bat <PYTHON> - ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (  error: subprocess-exited-with-error:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  
+  × Building wheel for simple_knn (pyproject.toml) did not run successfully.
+  │ exit code: 1
+  ╰─> [92 lines of output]
+      running bdist_wheel
+      running build
+      running build_ext
+      <CONDA_ENV>\lib\site-packages\torch\utils\cpp_extension.py:381: UserWarning: Error checking co
+mpiler version for cl: 'cp1' codec can't decode bytes in position 0--1: No mapping for the Unicode character exists in 
+the target code page.
+        warnings.warn(f'Error checking compiler version for {compiler}: {error}')
+      building 'simple_knn._C' extension
+      Emitting ninja build file <ORIGINAL_REPO_ROOT>\submodules\simple-knn\build\temp.win-amd64-cpython-39\Release
+\build.ninja...
+      Compiling objects...
+      Allowing ninja to set a default number of workers... (overridable by setting the environment variable MAX_JOBS=N)
+      [1/2] <CONDA_ENV>\bin\nvcc --generate-dependencies-with-compile --dependency-output "D:\AI WOR
+K\3dgs-mcmc-main\submodules\simple-knn\build\temp.win-amd64-cpython-39\Release\spatial.obj".d -std=c++17 --use-local-en
+v -Xcompiler /MD -Xcompiler /wd4819 -Xcompiler /wd4251 -Xcompiler /wd4244 -Xcompiler /wd4267 -Xcompiler /wd4275 -Xcompi
+ler /wd4018 -Xcompiler /wd4190 -Xcompiler /wd4624 -Xcompiler /wd4067 -Xcompiler /wd4068 -Xcompiler /EHsc -Xcudafe --dia
+g_suppress=base_class_has_different_dll_interface -Xcudafe --diag_suppress=field_without_dll_interface -Xcudafe --diag_
+suppress=dll_interface_conflict_none_assumed -Xcudafe --diag_suppress=dll_interface_conflict_dllexport_assumed -ID:\ana
+conda3\envs\pytorch2.2.2\lib\site-packages\torch\include -I<CONDA_ENV>\lib\site-packages\torch\inclu
+de\torch\csrc\api\include -I<CONDA_ENV>\lib\site-packages\torch\include\TH -I<ANACONDA_ROOT>\envs\pytor
+ch2.2.2\lib\site-packages\torch\include\THC -I<CONDA_ENV>\include -I<CONDA_ENV>\i
+nclude -I<CONDA_ENV>\Include -I<VISUAL_STUDIO_ROOT>\VC\Tools\MSVC\14.44.35207\include -I<VISUAL_STUDIO_ROOT>\V
+C\Tools\MSVC\14.44.35207\ATLMFC\include -I<VISUAL_STUDIO_ROOT>\VC\Auxiliary\VS\include "-I<WINDOWS_KITS_ROOT>\10\include\10.0.26
+100.0\ucrt" "-I<WINDOWS_KITS_ROOT>\10\\include\10.0.26100.0\\um" "-I<WINDOWS_KITS_ROOT>\10\\include\10.0.26100.0\\shared" "-ID:
+\Windows Kits\10\\include\10.0.26100.0\\winrt" "-I<WINDOWS_KITS_ROOT>\10\\include\10.0.26100.0\\cppwinrt" -c "<WORKSPACE_PATH>
+gs-mcmc-main\submodules\simple-knn\spatial.cu" -o "<ORIGINAL_REPO_ROOT>\submodules\simple-knn\build\temp.win-amd64
+-cpython-39\Release\spatial.obj" -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_BFLOAT16_CONVE
+RSIONS__ -D__CUDA_NO_HALF2_OPERATORS__ --expt-relaxed-constexpr -DTORCH_API_INCLUDE_EXTENSION_H -DTORCH_EXTENSION_NAME=
+_C -D_GLIBCXX_USE_CXX11_ABI=0 -gencode=arch=compute_89,code=sm_89
+      FAILED: [code=1] D:/AI WORK/3dgs-mcmc-main/submodules/simple-knn/build/temp.win-amd64-cpython-39/Release/spatial.
+obj
+      <CONDA_ENV>\bin\nvcc --generate-dependencies-with-compile --dependency-output "<WORKSPACE_PATH>
+-mcmc-main\submodules\simple-knn\build\temp.win-amd64-cpython-39\Release\spatial.obj".d -std=c++17 --use-local-env -Xco
+mpiler /MD -Xcompiler /wd4819 -Xcompiler /wd4251 -Xcompiler /wd4244 -Xcompiler /wd4267 -Xcompiler /wd4275 -Xcompiler /w
+d4018 -Xcompiler /wd4190 -Xcompiler /wd4624 -Xcompiler /wd4067 -Xcompiler /wd4068 -Xcompiler /EHsc -Xcudafe --diag_supp
+ress=base_class_has_different_dll_interface -Xcudafe --diag_suppress=field_without_dll_interface -Xcudafe --diag_suppre
+ss=dll_interface_conflict_none_assumed -Xcudafe --diag_suppress=dll_interface_conflict_dllexport_assumed -I<ANACONDA_ROOT>
+\envs\pytorch2.2.2\lib\site-packages\torch\include -I<CONDA_ENV>\lib\site-packages\torch\include\tor
+ch\csrc\api\include -I<CONDA_ENV>\lib\site-packages\torch\include\TH -I<ANACONDA_ROOT>\envs\pytorch2.2.
+2\lib\site-packages\torch\include\THC -I<CONDA_ENV>\include -I<CONDA_ENV>\include
+ -I<CONDA_ENV>\Include -I<VISUAL_STUDIO_ROOT>\VC\Tools\MSVC\14.44.35207\include -I<VISUAL_STUDIO_ROOT>\VC\Tool
+s\MSVC\14.44.35207\ATLMFC\include -I<VISUAL_STUDIO_ROOT>\VC\Auxiliary\VS\include "-I<WINDOWS_KITS_ROOT>\10\include\10.0.26100.0\
+ucrt" "-I<WINDOWS_KITS_ROOT>\10\\include\10.0.26100.0\\um" "-I<WINDOWS_KITS_ROOT>\10\\include\10.0.26100.0\\shared" "-ID:\Windo
+ws Kits\10\\include\10.0.26100.0\\winrt" "-I<WINDOWS_KITS_ROOT>\10\\include\10.0.26100.0\\cppwinrt" -c "<WORKSPACE_PATH>
+c-main\submodules\simple-knn\spatial.cu" -o "<ORIGINAL_REPO_ROOT>\submodules\simple-knn\build\temp.win-amd64-cpyth
+on-39\Release\spatial.obj" -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_BFLOAT16_CONVERSIONS
+__ -D__CUDA_NO_HALF2_OPERATORS__ --expt-relaxed-constexpr -DTORCH_API_INCLUDE_EXTENSION_H -DTORCH_EXTENSION_NAME=_C -D_
+GLIBCXX_USE_CXX11_ABI=0 -gencode=arch=compute_89,code=sm_89
+      [2/2] <CONDA_ENV>\bin\nvcc --generate-dependencies-with-compile --dependency-output "D:\AI WOR
+K\3dgs-mcmc-main\submodules\simple-knn\build\temp.win-amd64-cpython-39\Release\simple_knn.obj".d -std=c++17 --use-local
+-env -Xcompiler /MD -Xcompiler /wd4819 -Xcompiler /wd4251 -Xcompiler /wd4244 -Xcompiler /wd4267 -Xcompiler /wd4275 -Xco
+mpiler /wd4018 -Xcompiler /wd4190 -Xcompiler /wd4624 -Xcompiler /wd4067 -Xcompiler /wd4068 -Xcompiler /EHsc -Xcudafe --
+diag_suppress=base_class_has_different_dll_interface -Xcudafe --diag_suppress=field_without_dll_interface -Xcudafe --di
+ag_suppress=dll_interface_conflict_none_assumed -Xcudafe --diag_suppress=dll_interface_conflict_dllexport_assumed -ID:\
+anaconda3\envs\pytorch2.2.2\lib\site-packages\torch\include -I<CONDA_ENV>\lib\site-packages\torch\in
+clude\torch\csrc\api\include -I<CONDA_ENV>\lib\site-packages\torch\include\TH -I<ANACONDA_ROOT>\envs\py
+torch2.2.2\lib\site-packages\torch\include\THC -I<CONDA_ENV>\include -I<ANACONDA_ROOT>\envs\pytorch2.2.
+2\include -I<CONDA_ENV>\Include -I<VISUAL_STUDIO_ROOT>\VC\Tools\MSVC\14.44.35207\include -ID:\VisualStudi
+o\VC\Tools\MSVC\14.44.35207\ATLMFC\include -I<VISUAL_STUDIO_ROOT>\VC\Auxiliary\VS\include "-I<WINDOWS_KITS_ROOT>\10\include\10.0
+.26100.0\ucrt" "-I<WINDOWS_KITS_ROOT>\10\\include\10.0.26100.0\\um" "-I<WINDOWS_KITS_ROOT>\10\\include\10.0.26100.0\\shared" "-
+I<WINDOWS_KITS_ROOT>\10\\include\10.0.26100.0\\winrt" "-I<WINDOWS_KITS_ROOT>\10\\include\10.0.26100.0\\cppwinrt" -c "<WORKSPACE_ROOT>
+\3dgs-mcmc-main\submodules\simple-knn\simple_knn.cu" -o "<ORIGINAL_REPO_ROOT>\submodules\simple-knn\build\temp.win
+-amd64-cpython-39\Release\simple_knn.obj" -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_BFLOA
+T16_CONVERSIONS__ -D__CUDA_NO_HALF2_OPERATORS__ --expt-relaxed-constexpr -DTORCH_API_INCLUDE_EXTENSION_H -DTORCH_EXTENS
+ION_NAME=_C -D_GLIBCXX_USE_CXX11_ABI=0 -gencode=arch=compute_89,code=sm_89
+      FAILED: [code=2] D:/AI WORK/3dgs-mcmc-main/submodules/simple-knn/build/temp.win-amd64-cpython-39/Release/simple_k
+nn.obj
+      <CONDA_ENV>\bin\nvcc --generate-dependencies-with-compile --dependency-output "<WORKSPACE_PATH>
+-mcmc-main\submodules\simple-knn\build\temp.win-amd64-cpython-39\Release\simple_knn.obj".d -std=c++17 --use-local-env -
+Xcompiler /MD -Xcompiler /wd4819 -Xcompiler /wd4251 -Xcompiler /wd4244 -Xcompiler /wd4267 -Xcompiler /wd4275 -Xcompiler
+ /wd4018 -Xcompiler /wd4190 -Xcompiler /wd4624 -Xcompiler /wd4067 -Xcompiler /wd4068 -Xcompiler /EHsc -Xcudafe --diag_s
+uppress=base_class_has_different_dll_interface -Xcudafe --diag_suppress=field_without_dll_interface -Xcudafe --diag_sup
+press=dll_interface_conflict_none_assumed -Xcudafe --diag_suppress=dll_interface_conflict_dllexport_assumed -ID:\anacon
+da3\envs\pytorch2.2.2\lib\site-packages\torch\include -I<CONDA_ENV>\lib\site-packages\torch\include\
+torch\csrc\api\include -I<CONDA_ENV>\lib\site-packages\torch\include\TH -I<ANACONDA_ROOT>\envs\pytorch2
+.2.2\lib\site-packages\torch\include\THC -I<CONDA_ENV>\include -I<CONDA_ENV>\incl
+ude -I<CONDA_ENV>\Include -I<VISUAL_STUDIO_ROOT>\VC\Tools\MSVC\14.44.35207\include -I<VISUAL_STUDIO_ROOT>\VC\T
+ools\MSVC\14.44.35207\ATLMFC\include -I<VISUAL_STUDIO_ROOT>\VC\Auxiliary\VS\include "-I<WINDOWS_KITS_ROOT>\10\include\10.0.26100
+.0\ucrt" "-I<WINDOWS_KITS_ROOT>\10\\include\10.0.26100.0\\um" "-I<WINDOWS_KITS_ROOT>\10\\include\10.0.26100.0\\shared" "-ID:\Wi
+ndows Kits\10\\include\10.0.26100.0\\winrt" "-I<WINDOWS_KITS_ROOT>\10\\include\10.0.26100.0\\cppwinrt" -c "<WORKSPACE_PATH>
+mcmc-main\submodules\simple-knn\simple_knn.cu" -o "<ORIGINAL_REPO_ROOT>\submodules\simple-knn\build\temp.win-amd64
+-cpython-39\Release\simple_knn.obj" -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_BFLOAT16_CO
+NVERSIONS__ -D__CUDA_NO_HALF2_OPERATORS__ --expt-relaxed-constexpr -DTORCH_API_INCLUDE_EXTENSION_H -DTORCH_EXTENSION_NA
+ME=_C -D_GLIBCXX_USE_CXX11_ABI=0 -gencode=arch=compute_89,code=sm_89
+      ninja: build stopped: subcommand failed.
+      Traceback (most recent call last):
+        File "<CONDA_ENV>\lib\site-packages\torch\utils\cpp_extension.py", line 2096, in _run_ninja_
+build
+          subprocess.run(
+        File "<CONDA_ENV>\lib\subprocess.py", line 528, in run
+          raise CalledProcessError(retcode, process.args,
+      subprocess.CalledProcessError: Command '['ninja', '-v']' returned non-zero exit status 2.
+      
+      The above exception was the direct cause of the following exception:
+      
+      Traceback (most recent call last):
+        File "<CONDA_ENV>\lib\site-packages\pip\_vendor\pyproject_hooks\_in_process\_in_process.py",
+ line 389, in <module>
+          main()
+        File "<CONDA_ENV>\lib\site-packages\pip\_vendor\pyproject_hooks\_in_process\_in_process.py",
+ line 373, in main
+          json_out["return_val"] = hook(**hook_input["kwargs"])
+        File "<CONDA_ENV>\lib\site-packages\pip\_vendor\pyproject_hooks\_in_process\_in_process.py",
+ line 280, in build_wheel
+          return _build_backend().build_wheel(
+        File "<CONDA_ENV>\lib\site-packages\setuptools\build_meta.py", line 435, in build_wheel
+          return _build(['bdist_wheel', '--dist-info-dir', str(metadata_directory)])
+        File "<CONDA_ENV>\lib\site-packages\setuptools\build_meta.py", line 423, in _build
+          return self._build_with_temp_dir(
+        File "<CONDA_ENV>\lib\site-packages\setuptools\build_meta.py", line 404, in _build_with_temp
+_dir
+          self.run_setup()
+        File "<CONDA_ENV>\lib\site-packages\setuptools\build_meta.py", line 512, in run_setup
+          super().run_setup(setup_script=setup_script)
+        File "<CONDA_ENV>\lib\site-packages\setuptools\build_meta.py", line 317, in run_setup
+          exec(code, locals())
+        File "<string>", line 21, in <module>
+        File "<CONDA_ENV>\lib\site-packages\setuptools\__init__.py", line 115, in setup
+          return distutils.core.setup(**attrs)
+        File "<CONDA_ENV>\lib\site-packages\setuptools\_distutils\core.py", line 186, in setup
+          return run_commands(dist)
+        File "<CONDA_ENV>\lib\site-packages\setuptools\_distutils\core.py", line 202, in run_command
+s
+          dist.run_commands()
+        File "<CONDA_ENV>\lib\site-packages\setuptools\_distutils\dist.py", line 1002, in run_comman
+ds
+          self.run_command(cmd)
+        File "<CONDA_ENV>\lib\site-packages\setuptools\dist.py", line 1102, in run_command
+          super().run_command(command)
+        File "<CONDA_ENV>\lib\site-packages\setuptools\_distutils\dist.py", line 1021, in run_comman
+d
+          cmd_obj.run()
+        File "<CONDA_ENV>\lib\site-packages\setuptools\command\bdist_wheel.py", line 370, in run
+          self.run_command("build")
+        File "<CONDA_ENV>\lib\site-packages\setuptools\_distutils\cmd.py", line 357, in run_command
+          self.distribution.run_command(command)
+        File "<CONDA_ENV>\lib\site-packages\setuptools\dist.py", line 1102, in run_command
+          super().run_command(command)
+        File "<CONDA_ENV>\lib\site-packages\setuptools\_distutils\dist.py", line 1021, in run_comman
+d
+          cmd_obj.run()
+        File "<CONDA_ENV>\lib\site-packages\setuptools\_distutils\command\build.py", line 135, in ru
+n
+          self.run_command(cmd_name)
+        File "<CONDA_ENV>\lib\site-packages\setuptools\_distutils\cmd.py", line 357, in run_command
+          self.distribution.run_command(command)
+        File "<CONDA_ENV>\lib\site-packages\setuptools\dist.py", line 1102, in run_command
+          super().run_command(command)
+        File "<CONDA_ENV>\lib\site-packages\setuptools\_distutils\dist.py", line 1021, in run_comman
+d
+          cmd_obj.run()
+        File "<CONDA_ENV>\lib\site-packages\setuptools\command\build_ext.py", line 96, in run
+          _build_ext.run(self)
+        File "<CONDA_ENV>\lib\site-packages\setuptools\_distutils\command\build_ext.py", line 368, i
+n run
+          self.build_extensions()
+        File "<CONDA_ENV>\lib\site-packages\torch\utils\cpp_extension.py", line 871, in build_extens
+ions
+          build_ext.build_extensions(self)
+        File "<CONDA_ENV>\lib\site-packages\setuptools\_distutils\command\build_ext.py", line 484, i
+n build_extensions
+          self._build_extensions_serial()
+        File "<CONDA_ENV>\lib\site-packages\setuptools\_distutils\command\build_ext.py", line 510, i
+n _build_extensions_serial
+          self.build_extension(ext)
+        File "<CONDA_ENV>\lib\site-packages\setuptools\command\build_ext.py", line 261, in build_ext
+ension
+          _build_ext.build_extension(self, ext)
+        File "<CONDA_ENV>\lib\site-packages\setuptools\_distutils\command\build_ext.py", line 565, i
+n build_extension
+          objects = self.compiler.compile(
+        File "<CONDA_ENV>\lib\site-packages\torch\utils\cpp_extension.py", line 843, in win_wrap_nin
+ja_compile
+          _write_ninja_file_and_compile_objects(
+        File "<CONDA_ENV>\lib\site-packages\torch\utils\cpp_extension.py", line 1774, in _write_ninj
+a_file_and_compile_objects
+          _run_ninja_build(
+        File "<CONDA_ENV>\lib\site-packages\torch\utils\cpp_extension.py", line 2112, in _run_ninja_
+build
+          raise RuntimeError(message) from e
+      RuntimeError: Error compiling objects for extension
+      [end of output]
+  
+  note: This error originates from a subprocess, and is likely not a problem with pip.
+  ERROR: Failed building wheel for simple_knn
+Failed to build simple_knn
+error: failed-wheel-build-for-install
+
+× Failed to build installable wheels for some pyproject.toml based projects
+╰─> simple_knn

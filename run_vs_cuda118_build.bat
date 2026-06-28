@@ -1,0 +1,13 @@
+@echo off
+if "%VS_VCVARS64%"=="" set VS_VCVARS64=<PATH_TO_VS_VCVARS64_BAT>
+if "%CONDA_ENV%"=="" set CONDA_ENV=<PATH_TO_CONDA_ENV>
+call "%VS_VCVARS64%" >nul
+set DISTUTILS_USE_SDK=1
+set MSSdk=1
+set CUDA_HOME=%CONDA_ENV%
+set PATH=%CONDA_ENV%\bin;%PATH%
+set TORCH_CUDA_ARCH_LIST=8.9
+set PYTHONUTF8=1
+set TMP=%CD%\tmp
+set TEMP=%CD%\tmp
+%*
